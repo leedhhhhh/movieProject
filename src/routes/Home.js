@@ -1,9 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import Movie from "../components/Movie";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import styles from "./Home.module.css";
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -21,34 +18,15 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      {loading ? <h1>Loading...</h1> :
+    <div className={styles.container}>
+      {loading ? 
+        <div className={styles.loader}>
+          <span>Loading...</span>
+        </div>
+       :
       // 메인화면
       <Fragment>
-        <Navbar bg="light" expand="lg">
-          <Container>
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
-                    Separated link
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-        <div>
+        <div className={styles.movies}>
           {movies.map((movie) => 
             <Movie 
               key={movie.id}
